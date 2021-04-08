@@ -1,5 +1,5 @@
 <template>
-    <default-field :field="field">
+    <default-field :field="field" :showHelpText="showHelpText">
         <template slot="field">
             <div class="flex flex-wrap items-stretch w-full relative">
                 <div class="flex -mr-px">
@@ -26,7 +26,7 @@
         mixins: [FormField, HandlesValidationErrors],
 
         props: ['resourceName', 'resourceId', 'field'],
-        
+
         computed: {
             defaultAttributes() {
                 return {
@@ -52,7 +52,7 @@
                 }
             },
         },
-    
+
         methods: {
             /*
              * Set the initial, internal value for the field.

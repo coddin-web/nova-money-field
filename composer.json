@@ -1,5 +1,5 @@
 {
-  "name": "vyuldashev/nova-money-field",
+  "name": "coddin-web/nova-money-field",
   "description": "A Laravel Nova field for Money.",
   "keywords": [
     "laravel",
@@ -7,18 +7,18 @@
   ],
   "license": "MIT",
   "require": {
-    "php": ">=7.1.0",
+    "php": ">=7.4.0",
     "moneyphp/money": "^3.1"
   },
   "autoload": {
     "psr-4": {
-      "Vyuldashev\\NovaMoneyField\\": "src/"
+      "Coddin\\NovaMoneyField\\": "src/"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "Vyuldashev\\NovaMoneyField\\FieldServiceProvider"
+        "Coddin\\NovaMoneyField\\FieldServiceProvider"
       ]
     }
   },

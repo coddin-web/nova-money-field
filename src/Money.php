@@ -1,26 +1,28 @@
 <?php
 
-namespace Vyuldashev\NovaMoneyField;
+declare(strict_types=1);
+
+namespace Coddin\NovaMoneyField;
 
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Metable;
 use Money\Currencies\AggregateCurrencies;
 use Money\Currencies\BitcoinCurrencies;
 use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 
-class Money extends Number
+final class Money extends Number
 {
-    /**
-     * The field's component.
-     *
-     * @var string
-     */
     public $component = 'nova-money-field';
 
-    public $inMinorUnits;
+    public bool $inMinorUnits;
 
-    public function __construct($name, $currency = 'USD', $attribute = null, $resolveCallback = null)
+    public function __construct(
+        string $name,
+        string $currency = 'USD',
+        ?string $attribute = null,
+        ?callable $resolveCallback = null)
     {
         parent::__construct($name, $attribute, $resolveCallback);
 
@@ -53,19 +55,19 @@ class Money extends Number
     /**
      * The value in database is store in minor units (cents for dollars).
      */
-    public function storedInMinorUnits()
+    public function storedInMinorUnits(): self
     {
         $this->inMinorUnits = true;
 
         return $this;
     }
 
-    public function locale($locale)
+    public function locale(string $locale): Metable
     {
         return $this->withMeta(['locale' => $locale]);
     }
 
-    public function subUnits(string $currency)
+    public function subUnits(string $currency): int
     {
         return (new AggregateCurrencies([
             new ISOCurrencies(),
@@ -73,7 +75,7 @@ class Money extends Number
         ]))->subunitFor(new Currency($currency));
     }
 
-    public function minorUnit($currency)
+    public function minorUnit(string $currency): int
     {
         return 10 ** $this->subUnits($currency);
     }
