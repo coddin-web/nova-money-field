@@ -20,11 +20,14 @@ final class Money extends Number
 
     public function __construct(
         string $name,
-        string $currency = 'USD',
+        string $currency = null,
         ?string $attribute = null,
         ?callable $resolveCallback = null)
     {
         parent::__construct($name, $attribute, $resolveCallback);
+        
+        $currency ??= config('nova.currency');
+        $currency ??= 'USD';
 
         $this->withMeta([
             'currency' => $currency,
