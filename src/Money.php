@@ -16,7 +16,7 @@ final class Money extends Number
 {
     public $component = 'nova-money-field';
 
-    public bool $inMinorUnits;
+    public bool $inMinorUnits = false;
 
     public function __construct(
         string $name,
